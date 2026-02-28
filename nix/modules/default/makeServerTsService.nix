@@ -75,6 +75,7 @@ lib.recursiveUpdate
       StateDirectoryMode = "0750";
       RuntimeDirectory = "spacebar";
       RuntimeDirectoryMode = "0750";
+      RuntimeDirectoryPreserve = "yes";
       ReadWritePaths = [ cfg.cdnPath ];
       NoExecPaths = [ cfg.cdnPath ];
 
