@@ -4,12 +4,13 @@ using Spacebar.Models.Db.Contexts;
 using Spacebar.Models.Db.Models;
 using Spacebar.UApi.Controllers.Messages;
 using Spacebar.UApi.Services;
+using Config = Spacebar.ConfigModel.Config;
 
 namespace Spacebar.UApi.Controllers;
 
 [ApiController]
 [Route("/api/v{_}/guilds/{guildId}/stickers/")]
-public class GuildStickerController(ILogger<MessagesController> logger, SpacebarDbContext db, SpacebarAspNetAuthenticationService authService, UApiConfiguration cfg, PermissionService permService) : ControllerBase {
+public class GuildStickerController(ILogger<MessagesController> logger, SpacebarDbContext db, SpacebarAspNetAuthenticationService authService, UApiConfiguration cfg, PermissionService permService, Config sbCfg) : ControllerBase {
     // TODO proper response type
     [HttpPost]
     public async Task<Sticker> UploadGuildSticker(string guildId, MultipartFormDataContent content) {
@@ -31,6 +32,7 @@ public class GuildStickerController(ILogger<MessagesController> logger, Spacebar
                     break;
                 case "file":
                     var fileContent = await item.ReadAsStreamAsync();
+                    
                     break;
             }
         }
