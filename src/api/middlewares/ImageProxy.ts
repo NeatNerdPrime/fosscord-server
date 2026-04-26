@@ -36,6 +36,7 @@ const sharpSupported = new Set(["image/jpeg", "image/png", "image/bmp", "image/t
 const jimpSupported = new Set(["image/jpeg", "image/png", "image/bmp", "image/tiff", "image/gif"]);
 const resizeSupported = new Set([...sharpSupported, ...jimpSupported]);
 
+// This is meant to be used instead of Imagor
 export async function ImageProxy(req: Request, res: Response) {
     const path = req.originalUrl.split("/").slice(2);
 
