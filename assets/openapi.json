@@ -205,37 +205,6 @@
                     "type"
                 ]
             },
-<<<<<<< HEAD
-            "AckBulkSchema": {
-                "type": "object",
-                "properties": {
-                    "read_states": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "channel_id": {
-                                    "type": "string"
-                                },
-                                "message_id": {
-                                    "type": "string"
-                                },
-                                "read_state_type": {
-                                    "type": "integer"
-                                }
-                            },
-                            "additionalProperties": false,
-                            "required": [
-                                "channel_id",
-                                "message_id",
-                                "read_state_type"
-                            ]
-                        }
-                    }
-                },
-                "required": [
-                    "read_states"
-=======
             "RouteResponse": {
                 "type": "object",
                 "properties": {
@@ -268,7 +237,6 @@
                     "code",
                     "errors",
                     "message"
->>>>>>> 288a50d8d (Clean up imports in schemas/api/bots)
                 ]
             },
             "ActivitySchema": {
@@ -1666,12 +1634,20 @@
                     "type"
                 ]
             },
-            "GatewayBotResponse": {
+            "GatewayResponse": {
                 "type": "object",
                 "properties": {
                     "url": {
                         "type": "string"
-                    },
+                    }
+                },
+                "required": [
+                    "url"
+                ]
+            },
+            "GatewayBotResponse": {
+                "type": "object",
+                "properties": {
                     "shards": {
                         "type": "integer"
                     },
@@ -1698,22 +1674,14 @@
                             "reset_after",
                             "total"
                         ]
-                    }
-                },
-                "required": [
-                    "session_start_limit",
-                    "shards",
-                    "url"
-                ]
-            },
-            "GatewayResponse": {
-                "type": "object",
-                "properties": {
+                    },
                     "url": {
                         "type": "string"
                     }
                 },
                 "required": [
+                    "session_start_limit",
+                    "shards",
                     "url"
                 ]
             },
@@ -2276,14 +2244,8 @@
                         "type": "boolean"
                     },
                     "channel_id": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/Snowflake"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -2528,6 +2490,34 @@
                 },
                 "required": [
                     "location"
+                ]
+            },
+            "PartialConnectedAccountResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "verified": {
+                        "type": "boolean"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": true
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "verified"
                 ]
             },
             "PreloadMessagesResponseSchema": {
@@ -3630,6 +3620,72 @@
                     "name",
                     "tags",
                     "type"
+                ]
+            },
+            "CreateReportSchema": {
+                "type": "object",
+                "properties": {
+                    "version": {
+                        "type": "string"
+                    },
+                    "variant": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "breadcrumbs": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "elements": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "channel_id": {
+                        "type": "string"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    },
+                    "guild_id": {
+                        "type": "string"
+                    },
+                    "stage_instance_id": {
+                        "type": "string"
+                    },
+                    "guild_scheduled_event_id": {
+                        "type": "string"
+                    },
+                    "reported_user_id": {
+                        "type": "string"
+                    },
+                    "application_id": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "widget_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "breadcrumbs",
+                    "language",
+                    "name",
+                    "variant",
+                    "version"
                 ]
             },
             "IdentifySchema": {
@@ -5097,34 +5153,36 @@
                     "user_profile"
                 ]
             },
+            "UserRelationResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "discriminator": {
+                        "type": "string"
+                    },
+                    "avatar": {
+                        "type": "string"
+                    },
+                    "public_flags": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "discriminator",
+                    "id",
+                    "public_flags",
+                    "username"
+                ]
+            },
             "UserRelationsResponse": {
                 "type": "array",
                 "items": {
-                    "additionalProperties": false,
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        },
-                        "discriminator": {
-                            "type": "string"
-                        },
-                        "avatar": {
-                            "type": "string"
-                        },
-                        "public_flags": {
-                            "type": "integer"
-                        }
-                    },
-                    "required": [
-                        "discriminator",
-                        "id",
-                        "public_flags",
-                        "username"
-                    ]
+                    "$ref": "#/components/schemas/UserRelationResponse"
                 }
             },
             "UserRelationshipsResponse": {
@@ -5368,6 +5426,37 @@
                         "type": "string"
                     }
                 }
+            },
+            "AckBulkSchema": {
+                "type": "object",
+                "properties": {
+                    "read_states": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "channel_id": {
+                                    "type": "string"
+                                },
+                                "message_id": {
+                                    "type": "string"
+                                },
+                                "read_state_type": {
+                                    "$ref": "#/components/schemas/ReadStateType"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                                "channel_id",
+                                "message_id",
+                                "read_state_type"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "read_states"
+                ]
             },
             "AcknowledgeDeleteSchema": {
                 "type": "object",
@@ -5630,12 +5719,12 @@
                         "additionalProperties": true
                     },
                     "original_response_message_id": {
-                        "description": "A container for useful snowflake-related methods.",
-                        "$ref": "#/components/schemas/Snowflake"
+                        "description": "A Twitter-like snowflake, except the epoch is 2015-01-01T00:00:00.000Z\n```\nIf we have a snowflake '266241948824764416' we can represent it as binary:\n\n64                                          22     17     12          0\n 000000111011000111100001101001000101000000  00001  00000  000000000000\n      number of ms since Discord epoch       worker  pid    increment\n```",
+                        "type": "string"
                     },
                     "interacted_message_id": {
-                        "description": "A container for useful snowflake-related methods.",
-                        "$ref": "#/components/schemas/Snowflake"
+                        "description": "A Twitter-like snowflake, except the epoch is 2015-01-01T00:00:00.000Z\n```\nIf we have a snowflake '266241948824764416' we can represent it as binary:\n\n64                                          22     17     12          0\n 000000111011000111100001101001000101000000  00001  00000  000000000000\n      number of ms since Discord epoch       worker  pid    increment\n```",
+                        "type": "string"
                     },
                     "triggering_interaction_metadata": {
                         "$ref": "#/components/schemas/MessageInteractionSchema"
@@ -5644,8 +5733,8 @@
                         "$ref": "#/components/schemas/PublicUser"
                     },
                     "target_message_id": {
-                        "description": "A container for useful snowflake-related methods.",
-                        "$ref": "#/components/schemas/Snowflake"
+                        "description": "A Twitter-like snowflake, except the epoch is 2015-01-01T00:00:00.000Z\n```\nIf we have a snowflake '266241948824764416' we can represent it as binary:\n\n64                                          22     17     12          0\n 000000111011000111100001101001000101000000  00001  00000  000000000000\n      number of ms since Discord epoch       worker  pid    increment\n```",
+                        "type": "string"
                     }
                 },
                 "required": [
@@ -7248,72 +7337,6 @@
                 "required": [
                     "id",
                     "name"
-                ]
-            },
-            "CreateReportSchema": {
-                "type": "object",
-                "properties": {
-                    "version": {
-                        "type": "string"
-                    },
-                    "variant": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "language": {
-                        "type": "string"
-                    },
-                    "breadcrumbs": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer"
-                        }
-                    },
-                    "elements": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "channel_id": {
-                        "type": "string"
-                    },
-                    "message_id": {
-                        "type": "string"
-                    },
-                    "guild_id": {
-                        "type": "string"
-                    },
-                    "stage_instance_id": {
-                        "type": "string"
-                    },
-                    "guild_scheduled_event_id": {
-                        "type": "string"
-                    },
-                    "reported_user_id": {
-                        "type": "string"
-                    },
-                    "application_id": {
-                        "type": "string"
-                    },
-                    "user_id": {
-                        "type": "string"
-                    },
-                    "widget_id": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "breadcrumbs",
-                    "language",
-                    "name",
-                    "variant",
-                    "version"
                 ]
             },
             "SessionsLogoutSchema": {
@@ -13306,10 +13329,6 @@
                 "required": [
                     "code"
                 ]
-            },
-            "Snowflake": {
-                "description": "A container for useful snowflake-related methods.",
-                "type": "object"
             },
             "HubDirectoryEntry": {
                 "type": "object",

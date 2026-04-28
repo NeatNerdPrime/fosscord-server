@@ -16,14 +16,13 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { route } from "@spacebar/api";
-import { Request, Response, Router } from "express";
-import { ReportMenuType, ReportMenuTypeNames } from "../../../schemas/api/reports/ReportMenu";
-import path from "node:path";
-import { HTTPError } from "lambert-server";
-import { CreateReportSchema } from "../../../schemas/api/reports/CreateReport";
-import { FieldErrors } from "@spacebar/util";
 import fs from "node:fs";
+import path from "node:path";
+import { Request, Response, Router } from "express";
+import { HTTPError } from "lambert-server";
+import { route } from "@spacebar/api";
+import { ReportMenuType, ReportMenuTypeNames, CreateReportSchema } from "@spacebar/schemas";
+import { FieldErrors } from "@spacebar/util";
 
 const router = Router({ mergeParams: true });
 if (process.env.LOG_ROUTES !== "false") console.log("[Server] Registering reporting menu routes...");
