@@ -29,7 +29,7 @@ public class Op14Controller(ILogger<Op12Controller> logger, SpacebarAspNetAuthen
     public async IAsyncEnumerable<ContentlessReplicationMessage> DoLazyRequest([FromBody] LazyRequest payload)
     {
         var user = await TraceResult.TraceAsync("getAuthUser", () => authService.GetCurrentUserAsync(Request));
-        var session = await TraceResult.TraceAsync("getAuthSession", () => authService.GetCurrentSessionAsync(Request));
+        // var session = await TraceResult.TraceAsync("getAuthSession", () => authService.GetCurrentSessionAsync(Request));
 
         if (!await db.Members.AsNoTracking().AnyAsync(m => m.GuildId == payload.GuildId && m.Id == user.Result.Id))
         {
